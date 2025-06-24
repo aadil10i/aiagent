@@ -9,6 +9,7 @@ client = genai.Client(api_key=api_key)
 
 if len(sys.argv) < 2:
     print("error no input provided")
+    sys.exit(1)
 
 input = sys.argv[1]
 

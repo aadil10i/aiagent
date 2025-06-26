@@ -19,12 +19,19 @@ def get_files_info(working_directory, directory=None):
 
     file_contents = os.listdir(path_to_check)
 
-    for i in range(len(file_contents)):
-        file_name = file_contents[i]
-        file_size = os.path.getsize(os.path.join(path_to_check, file_contents[i]))
-        is_dir = os.path.isdir(os.path.join(path_to_check, file_contents[i]))
+    for file_name in file_contents:
+        full_path = os.path.join(path_to_check, file_name)
+        file_size = os.path.getsize(full_path)
+        is_dir = os.path.isdir(full_path)
 
         print(f"- {file_name}: file_size={file_size} bytes, is_dir={is_dir}")
+
+
+if __name__ == "__main__":
+    script_dir = os.path.dirname(__file__)
+    project_root = os.path.abspath(os.path.join(script_dir, ".."))
+
+    get_files_info(project_root)
 
 
 # os.listdir(): List the contents of a directory

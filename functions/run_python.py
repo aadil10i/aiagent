@@ -17,7 +17,7 @@ def run_python_file(working_directory, file_path, *args):
 
     try:
         completed_process = subprocess.run(
-            ["python", file_path, *args],
+            ["python3", file_path, *args],
             cwd=working_directory,
             capture_output=True,
             text=True,
@@ -34,7 +34,9 @@ def run_python_file(working_directory, file_path, *args):
             output_parts.append(f"STDERR: {stderr}")
 
         if completed_process.returncode != 0:
-            output_parts.append(f"Process exited with code {completed_process.returncode}")
+            output_parts.append(
+                f"Process exited with code {completed_process.returncode}"
+            )
 
         if not output_parts:
             return "No output produced."

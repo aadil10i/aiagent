@@ -1,4 +1,5 @@
 import os
+from google.genai import types
 
 
 def get_files_info(working_directory, directory=None):
@@ -30,14 +31,23 @@ def get_files_info(working_directory, directory=None):
             print(f"Error: could not process file name {e}")
 
 
+schema_get_files_info = types.FunctionDeclaration(
+    name="get_files_info",
+    description="Lists files in the specified directory along with their sizes, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "directory": types.Schema(
+                type=types.Type.STRING,
+                description="The directory to list files from, relative to the working directory. If not provided, lists files in the working directory itself.",
+            ),
+        },
+    ),
+)
+
+
 if __name__ == "__main__":
     script_dir = os.path.dirname(__file__)
     project_root = os.path.abspath(os.path.join(script_dir, ".."))
 
     get_files_info(project_root)
-
-
-# os.listdir(): List the contents of a directory
-# os.path.getsize(): Get the size of a file
-# os.path.isfile(): Check if a path is a file
-# .join(): Join a list of strings together with a separator
